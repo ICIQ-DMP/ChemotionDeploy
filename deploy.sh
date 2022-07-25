@@ -7,11 +7,12 @@
 ensure_dependency()
 {
   # If $1 dependency is not present 
-  if ! command -v "$1"; then
+  if ! command -v "$1" &>/dev/null; then
     if isRoot; then 
       ${PACKAGE_MANAGER_INSTALL} "$1"
     else 
       # We are not root and dependency is not available, install using root
+      echo "Introduce password to install $1"
       sudo ${PACKAGE_MANAGER_INSTALL} "$1"
     fi 
   fi 
@@ -40,12 +41,14 @@ main()
   done
 
   # Download the docker-compose file 
-  wget https://raw.githubusercontent.com/ptrxyz/chemotion/latest-release/docker-compose.yml 
+  echo "Downloading docker compose file"
+  wget --show-progress https://raw.githubusercontent.com/ptrxyz/chemotion/latest-release/docker-compose.yml 
 
   # Run it using docker-compose, depending on our privileges
   if isRoot; then 
     docker-compose -d up
   else 
+    echo "Introduce password to run chemotion"
     sudo docker-compose -d up
   fi 
 
