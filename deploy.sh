@@ -54,7 +54,7 @@ main()
   else 
     echo
     echo "Introduce password to create container if asked"
-    sudo docker-compose create
+    sudo docker-compose -d up --no-start
     echo "Introduce password to deploy container if asked"
     sudo docker-compose -d up
   fi 
