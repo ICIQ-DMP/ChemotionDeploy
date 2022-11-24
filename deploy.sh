@@ -49,14 +49,14 @@ main()
 
   # Run it using docker-compose, depending on our privileges
   if isRoot; then 
-    docker-compose create
-    docker-compose -d up
+    docker-compose up -d --no-start
+    docker-compose up -d 
   else 
     echo
     echo "Introduce password to create container if asked"
-    sudo docker-compose -d up --no-start
+    sudo docker-compose up -d --no-start
     echo "Introduce password to deploy container if asked"
-    sudo docker-compose -d up
+    sudo docker-compose up -d
   fi 
 
   # Shows it in the browser, after active waiting
@@ -66,9 +66,18 @@ main()
   # Use xdg if available, if not use firefox, which is usually present in Linux systems
   if command -v "xdg-open" &>/dev/null; then
     xdg-open "http://localhost:4000/"
-  else 
+  else if command -v "firefox" &>/dev/null; then
     firefox "http://localhost:4000/"
+  else if command -v "wget" &>/dev/null; then
+    echo "No browser installed, do a wget"
+    wget "http://localhost:4000"
+  else if command -v "curl" &>/dev/null; then
+    echo "No browser installed, do a curl"
+    curl "http://localhost:4000"
+  else 
+    echo "There is not an available command to test the deployment"
   fi 
+  
 }
 
 
