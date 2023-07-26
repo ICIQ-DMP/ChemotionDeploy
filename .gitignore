@@ -56,3 +56,4 @@ dkms.conf
 # ingore docker-compose files donwloaded
 docker-compose.yml*
 shared
+index.html*
