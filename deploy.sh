@@ -45,7 +45,7 @@ main()
   echo
   echo "Downloading docker compose file"
   rm -f "${PROJECT_FOLDER}/docker-compose.yml*"
-  wget -q --show-progress https://raw.githubusercontent.com/ptrxyz/chemotion/cb906ce8d37e0a173ae66b3696a9f039f540eace/docker-compose.yml -O "${PROJECT_FOLDER}/docker-compose.yml"
+  wget -q --show-progress "https://raw.githubusercontent.com/ptrxyz/chemotion/cb906ce8d37e0a173ae66b3696a9f039f540eace/docker-compose.yml" -O "${PROJECT_FOLDER}/docker-compose.yml"
 
   # Run it using docker-compose, depending on our privileges
   if isRoot; then 
@@ -76,8 +76,7 @@ main()
     curl "http://localhost:4000"
   else 
     echo "There is not an available command to test the deployment"
-  fi 
-  
+  fi
 }
 
 
