@@ -17,14 +17,14 @@ services:
   # This module contains Wine to make .exe files work in Linux.
   # Antivirus may complain and is an optional module, so it can be left commented out
   # More about it in this issue: https://github.com/ComPlat/chemotion_ELN/issues/1331
-  msconvert:
-    image: ptrxyz/chemotion:msconvert-1.6.0
-    restart: unless-stopped
-    hostname: msconvert
-    volumes:
-      - spectra:/shared:rw
-    networks:
-      - chemotion
+  #msconvert:
+    #image: ptrxyz/chemotion:msconvert-1.6.0
+    #restart: unless-stopped
+    #hostname: msconvert
+    #volumes:
+      #- spectra:/shared:rw
+    #networks:
+      #- chemotion
 
   spectra:
     image: ptrxyz/chemotion:spectra-1.6.0
