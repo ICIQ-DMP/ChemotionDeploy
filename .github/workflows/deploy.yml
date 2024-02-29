@@ -20,11 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Stop eChempad container
+      - name: Stop Chemotion container
         run: docker compose down
 
-      - name: Force pulling of the images or they would not be updated
+      - name: Force pulling of the images
         run: docker compose pull
 
-      - name: restart eChempad container with new image, which will be automatically pulled
+      - name: restart chemotion container with new image, which will be automatically pulled
         run: docker compose up -d
