@@ -52,8 +52,7 @@ Mkfile.old
 dkms.conf
 
 # own gitignore rules
-
-# ingore docker-compose files donwloaded
-docker-compose.yml*
 shared
 index.html*
+.idea
+.idea/

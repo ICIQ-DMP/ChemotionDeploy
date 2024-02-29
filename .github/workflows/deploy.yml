@@ -1,0 +1,31 @@
+name: deploy
+
+# Trigger event on every push / delete event, no matter the branch
+# on: [push, delete]
+
+# Trigger event on every push / delete event, only in master branch
+on:
+  push:
+    branches:
+      - "master"
+  delete:
+    branches:
+      - "master"
+
+jobs:
+  deploy:
+    needs: build
+    runs-on: [self-hosted]
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Stop eChempad container
+        run: docker-compose down
+
+      - name: Force pulling of the images or they would not be updated
+        run: docker-compose pull
+
+      - name: restart eChempad container with new image, which will be automatically pulled
+        run: docker-compose up -d
