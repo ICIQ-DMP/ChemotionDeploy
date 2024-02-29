@@ -1,9 +1,7 @@
-# Obtained from https://raw.githubusercontent.com/ptrxyz/chemotion/latest-release/docker-compose.yml
-
-version: '3.9'
+version: "3.9"
 services:
   db:
-    image: postgres
+    image: postgres:13
     restart: unless-stopped
     hostname: db
     environment:
@@ -18,7 +16,7 @@ services:
   # Antivirus may complain and is an optional module, so it can be left commented out
   # More about it in this issue: https://github.com/ComPlat/chemotion_ELN/issues/1331
   msconvert:
-    image: ptrxyz/chemotion:msconvert-1.6.0
+    image: ptrxyz/chemotion:msconvert-1.8.2
     restart: unless-stopped
     hostname: msconvert
     volumes:
@@ -27,7 +25,7 @@ services:
       - chemotion
 
   spectra:
-    image: ptrxyz/chemotion:spectra-1.6.0
+    image: ptrxyz/chemotion:spectra-1.8.2
     restart: unless-stopped
     hostname: spectra
     volumes:
@@ -36,10 +34,9 @@ services:
       - msconvert
     networks:
       - chemotion
-    command: ["gunicorn", "--timeout", "600", "-w", "4", "-b", "0.0.0.0:4000", "server:app"]
 
   worker:
-    image: ptrxyz/chemotion:eln-1.6.0
+    image: ptrxyz/chemotion:eln-1.8.2
     restart: unless-stopped
     environment:
       - CONFIG_ROLE=worker
@@ -55,7 +52,7 @@ services:
       - chemotion
 
   eln:
-    image: ptrxyz/chemotion:eln-1.6.0
+    image: ptrxyz/chemotion:eln-1.8.2
     restart: unless-stopped
     environment:
       - CONFIG_ROLE=eln
@@ -74,7 +71,7 @@ services:
       - chemotion
 
   ketchersvc:
-    image: ptrxyz/chemotion:ketchersvc-1.6.0
+    image: ptrxyz/chemotion:ketchersvc-1.8.2
     restart: unless-stopped
     environment:
       - CONFIG_KETCHER_URL=http://eln:4000/ketcher/
@@ -86,7 +83,7 @@ services:
       - chemotion
 
   converter:
-    image: ptrxyz/chemotion:converter-1.6.0
+    image: ptrxyz/chemotion:converter-1.8.2
     restart: unless-stopped
     environment:
       - SECRET_KEY=imsupersecretandwanttobechanged
