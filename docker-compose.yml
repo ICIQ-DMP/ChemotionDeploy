@@ -61,8 +61,8 @@ services:
       - db
       - spectra
     volumes:
-      - ./shared/pullin:/shared
-      - ./shared/backup:/backup
+      - eln_pullin:/shared
+      - eln_backup:/backup
       - chemotion_data:/chemotion/data/
       - chemotion:/chemotion/app
     ports:
@@ -88,8 +88,8 @@ services:
     environment:
       - SECRET_KEY=imsupersecretandwanttobechanged
     volumes:
-      - ./services/converter/profiles:/srv/chemotion/profiles
-      - ./services/converter/datasets:/srv/chemotion/datasets
+      - converter_profiles:/srv/chemotion/profiles
+      - converter_datasets:/srv/chemotion/datasets
     networks:
       - chemotion
 
@@ -102,6 +102,14 @@ volumes:
     name: chemotion_db
   spectra:
     name: chemotion_spectra
+  eln_pullin:
+    name: eln_pullin
+  eln_backup:
+    name: eln_backup
+  converter_datasets:
+    name: converter_datasets
+  converter_profiles:
+    name: converter_profiles
 
 networks:
   chemotion:
