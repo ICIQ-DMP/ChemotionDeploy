@@ -21,10 +21,10 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Stop eChempad container
-        run: docker-compose down
+        run: docker compose down
 
       - name: Force pulling of the images or they would not be updated
-        run: docker-compose pull
+        run: docker compose pull
 
       - name: restart eChempad container with new image, which will be automatically pulled
-        run: docker-compose up -d
+        run: docker compose up -d
